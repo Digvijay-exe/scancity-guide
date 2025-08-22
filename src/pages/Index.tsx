@@ -1,7 +1,7 @@
-import { ScanInterface } from "@/components/ScanInterface";
+import { DirectionsApp } from "@/components/DirectionsApp";
 
 const Index = () => {
-  return <ScanInterface />;
+  return <DirectionsApp />;
 };
 
 export default Index;
