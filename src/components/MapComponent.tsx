@@ -66,6 +66,60 @@ export const MapComponent = ({ startLocation, endLocation, routeCoordinates }: M
   const defaultCenter: [number, number] = [20.5937, 78.9629];
   const defaultZoom = 5;
 
+  const MapContent = () => (
+    <>
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      
+      <MapController
+        startLocation={startLocation}
+        endLocation={endLocation}
+        routeCoordinates={routeCoordinates}
+      />
+
+      {startLocation && (
+        <Marker
+          position={[startLocation.lat, startLocation.lng]}
+          icon={startIcon}
+        >
+          <Popup>
+            <div className="text-center">
+              <div className="font-semibold text-green-600">Start</div>
+              <div className="text-sm">{startLocation.name}</div>
+            </div>
+          </Popup>
+        </Marker>
+      )}
+
+      {endLocation && (
+        <Marker
+          position={[endLocation.lat, endLocation.lng]}
+          icon={endIcon}
+        >
+          <Popup>
+            <div className="text-center">
+              <div className="font-semibold text-red-600">Destination</div>
+              <div className="text-sm">{endLocation.name}</div>
+            </div>
+          </Popup>
+        </Marker>
+      )}
+
+      {routeCoordinates && routeCoordinates.length > 1 && (
+        <Polyline
+          positions={routeCoordinates}
+          pathOptions={{
+            color: '#3b82f6',
+            weight: 4,
+            opacity: 0.8,
+          }}
+        />
+      )}
+    </>
+  );
+
   return (
     <div className="h-full w-full relative">
       <MapContainer
@@ -75,58 +129,7 @@ export const MapComponent = ({ startLocation, endLocation, routeCoordinates }: M
         className="h-full w-full rounded-lg"
         scrollWheelZoom={true}
       >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        
-        <MapController
-          startLocation={startLocation}
-          endLocation={endLocation}
-          routeCoordinates={routeCoordinates}
-        />
-
-        {/* Start Location Marker */}
-        {startLocation && (
-          <Marker
-            position={[startLocation.lat, startLocation.lng]}
-            icon={startIcon}
-          >
-            <Popup>
-              <div className="text-center">
-                <div className="font-semibold text-green-600">Start</div>
-                <div className="text-sm">{startLocation.name}</div>
-              </div>
-            </Popup>
-          </Marker>
-        )}
-
-        {/* End Location Marker */}
-        {endLocation && (
-          <Marker
-            position={[endLocation.lat, endLocation.lng]}
-            icon={endIcon}
-          >
-            <Popup>
-              <div className="text-center">
-                <div className="font-semibold text-red-600">Destination</div>
-                <div className="text-sm">{endLocation.name}</div>
-              </div>
-            </Popup>
-          </Marker>
-        )}
-
-        {/* Route Polyline */}
-        {routeCoordinates && routeCoordinates.length > 1 && (
-          <Polyline
-            positions={routeCoordinates}
-            pathOptions={{
-              color: '#3b82f6',
-              weight: 4,
-              opacity: 0.8,
-            }}
-          />
-        )}
+        <MapContent />
       </MapContainer>
 
       {/* Map Attribution */}
