@@ -52,7 +52,7 @@ export const DirectionsApp = () => {
           [start.lat + 0.02, start.lng + 0.02],
           [end.lat - 0.01, end.lng - 0.01],
           [end.lat, end.lng]
-        ]
+        ] as Array<[number, number]>
       };
       
       setRouteData(mockRoute);

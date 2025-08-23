@@ -109,7 +109,7 @@ export const MapComponent = ({ startLocation, endLocation, routeCoordinates }: M
 
       {routeCoordinates && routeCoordinates.length > 1 && (
         <Polyline
-          positions={routeCoordinates}
+          positions={routeCoordinates as Array<[number, number]>}
           pathOptions={{
             color: '#3b82f6',
             weight: 4,
