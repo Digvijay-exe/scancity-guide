@@ -60,76 +60,67 @@ const MapController = ({ startLocation, endLocation, routeCoordinates }: MapComp
 };
 
 export const MapComponent = ({ startLocation, endLocation, routeCoordinates }: MapComponentProps) => {
-  const mapRef = useRef<L.Map>(null);
-
   // Default center on India
   const defaultCenter: [number, number] = [20.5937, 78.9629];
   const defaultZoom = 5;
-
-  const MapContent = () => (
-    <>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      
-      <MapController
-        startLocation={startLocation}
-        endLocation={endLocation}
-        routeCoordinates={routeCoordinates}
-      />
-
-      {startLocation && (
-        <Marker
-          position={[startLocation.lat, startLocation.lng]}
-          icon={startIcon}
-        >
-          <Popup>
-            <div className="text-center">
-              <div className="font-semibold text-green-600">Start</div>
-              <div className="text-sm">{startLocation.name}</div>
-            </div>
-          </Popup>
-        </Marker>
-      )}
-
-      {endLocation && (
-        <Marker
-          position={[endLocation.lat, endLocation.lng]}
-          icon={endIcon}
-        >
-          <Popup>
-            <div className="text-center">
-              <div className="font-semibold text-red-600">Destination</div>
-              <div className="text-sm">{endLocation.name}</div>
-            </div>
-          </Popup>
-        </Marker>
-      )}
-
-      {routeCoordinates && routeCoordinates.length > 1 && (
-        <Polyline
-          positions={routeCoordinates as Array<[number, number]>}
-          pathOptions={{
-            color: '#3b82f6',
-            weight: 4,
-            opacity: 0.8,
-          }}
-        />
-      )}
-    </>
-  );
 
   return (
     <div className="h-full w-full relative">
       <MapContainer
         center={defaultCenter}
         zoom={defaultZoom}
-        ref={mapRef}
         className="h-full w-full rounded-lg"
         scrollWheelZoom={true}
       >
-        <MapContent />
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        
+        <MapController
+          startLocation={startLocation}
+          endLocation={endLocation}
+          routeCoordinates={routeCoordinates}
+        />
+
+        {startLocation && (
+          <Marker
+            position={[startLocation.lat, startLocation.lng]}
+            icon={startIcon}
+          >
+            <Popup>
+              <div className="text-center">
+                <div className="font-semibold text-green-600">Start</div>
+                <div className="text-sm">{startLocation.name}</div>
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
+        {endLocation && (
+          <Marker
+            position={[endLocation.lat, endLocation.lng]}
+            icon={endIcon}
+          >
+            <Popup>
+              <div className="text-center">
+                <div className="font-semibold text-red-600">Destination</div>
+                <div className="text-sm">{endLocation.name}</div>
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
+        {routeCoordinates && routeCoordinates.length > 1 && (
+          <Polyline
+            positions={routeCoordinates as Array<[number, number]>}
+            pathOptions={{
+              color: '#3b82f6',
+              weight: 4,
+              opacity: 0.8,
+            }}
+          />
+        )}
       </MapContainer>
 
       {/* Map Attribution */}
