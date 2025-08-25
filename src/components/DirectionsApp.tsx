@@ -72,7 +72,7 @@ export const DirectionsApp = () => {
       <div className="border-b border-border bg-card/50 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-full bg-gradient-primary glow-primary">
+            <div className="p-2 rounded-full bg-primary shadow-lg">
               <Navigation className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>

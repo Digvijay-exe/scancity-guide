@@ -152,7 +152,7 @@ export const LocationSearch = ({ onGetDirections, isLoading, onClear }: Location
         <Button
           onClick={handleGetDirections}
           disabled={!startInput.trim() || !endInput.trim() || isProcessing}
-          className="flex-1 bg-gradient-primary glow-primary"
+          className="flex-1"
         >
           {isProcessing ? (
             <>

@@ -69,7 +69,7 @@ export const DirectionsPanel = ({ routeData, startLocation, endLocation }: Direc
               className="flex gap-3 p-3 bg-background/50 rounded-lg hover:bg-background/70 transition-colors"
             >
               <div className="flex-shrink-0">
-                <div className="w-8 h-8 rounded-full bg-gradient-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">
+                <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-semibold">
                   {index + 1}
                 </div>
               </div>
